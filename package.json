@@ -1,5 +1,5 @@
 {
-  "name": "atomTemplate",
+  "name": "shopping_app_ui",
   "version": "0.0.1",
   "scripts": {
     "android": "react-native run-android",
