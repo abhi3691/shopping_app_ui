@@ -68,7 +68,7 @@ class ProductList extends Component {
     const {productName, DateOfPurchase, productImage, requestStatus} =
       data.item;
     return (
-      <View style={{flex: 1}}>
+      <View style={{flexGrow: 1}}>
         <ProductListSwipe />
         <ProductKeyFeatures />
         <ProductCustomerReview />

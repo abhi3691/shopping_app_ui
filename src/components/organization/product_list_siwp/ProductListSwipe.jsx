@@ -4,19 +4,25 @@ import SwiperFlatList from 'react-native-swiper-flatlist';
 import products from './Products';
 import ImagePreviewSingle from '../../molecules/image_preview_single/ImagePreviewSingle';
 import styles from './ProductListSwipeStyle';
+import customColor from '../../../theme/Color';
 
 const ProductListSwipe = () => {
   return (
-    <SwiperFlatList
-      autoplay
-      autoplayDelay={5}
-      autoplayLoop
-      showPagination
-      data={products}
-      keyExtractor={item => item.id}
-      renderItem={({item}) => <ImagePreviewSingle item={item} />}
-      style={styles.container}
-    />
+    <View style={styles.container}>
+      <SwiperFlatList
+        autoplay
+        autoplayDelay={5}
+        autoplayLoop
+        showPagination
+        paginationDefaultColor={customColor.white}
+        paginationActiveColor={customColor.gray}
+        paginationStyleItemInactive={styles.inActive}
+        data={products}
+        keyExtractor={item => item.id}
+        renderItem={({item}) => <ImagePreviewSingle item={item} />}
+        style={styles.container}
+      />
+    </View>
   );
 };
 
