@@ -1,5 +1,5 @@
-import { Dimensions } from "react-native";
+import {Dimensions} from 'react-native';
 
-const ScreenRatio ={width,height} = Dimensions.get('window')
+const ScreenRatio = ({width, height} = Dimensions.get('window'));
 
-export default ScreenRatio
+export default ScreenRatio;

@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native'
-import FontRatio from '../../../global_functions/font_ratio/FontRatio'
-import ScreenRatio from '../../../global_functions/screen_ratio/ScreenRatio'
-import customColor from '../../../theme/Color'
+import {StyleSheet} from 'react-native';
+import FontRatio from '../../../global_functions/font_ratio/FontRatio';
+import ScreenRatio from '../../../global_functions/screen_ratio/ScreenRatio';
+import customColor from '../../../theme/Color';
 
 const styles = StyleSheet.create({
   container: {
@@ -19,17 +19,16 @@ const styles = StyleSheet.create({
     width: ScreenRatio.width / 1.15,
     flexDirection: 'row',
     alignItems: 'center',
-
   },
   imageStye: {
     height: ScreenRatio.height / 11,
-    width: ScreenRatio.height / 11
+    width: ScreenRatio.height / 11,
   },
   infoContainer: {
     height: ScreenRatio.height / 12,
     width: ScreenRatio.width / 1.5,
     justifyContent: 'space-evenly',
-    marginLeft: 10
+    marginLeft: 10,
   },
   nameText: {
     fontSize: FontRatio(13),
@@ -37,7 +36,7 @@ const styles = StyleSheet.create({
   },
   dateContainer: {
     flexDirection: 'row',
-    alignItems:'center'
+    alignItems: 'center',
   },
   dateTitle: {
     fontSize: FontRatio(10),
@@ -46,8 +45,8 @@ const styles = StyleSheet.create({
   date: {
     fontSize: FontRatio(10),
     color: customColor.black,
-    marginLeft:10,
-  }
-})
+    marginLeft: 10,
+  },
+});
 
-export default styles
+export default styles;
