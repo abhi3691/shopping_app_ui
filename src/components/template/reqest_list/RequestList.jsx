@@ -46,6 +46,7 @@ class RequestList extends Component {
             productName: data[i].productName,
             DateOfPurchase: data[i].DateOfPurchase,
             productImage: data[i].productImage,
+            requestStatus: false,
           },
         });
         if (i == data.length - 1) {
@@ -59,14 +60,27 @@ class RequestList extends Component {
     }
   };
 
+  //request change function
+
+  changeStatus = index => {
+    this.state.dataList[index].item.requestStatus =
+      !this.state.dataList[index].item.requestStatus;
+    this.setState({
+      extendedState: this.state.dataList[index].item.requestStatus,
+    });
+  };
+
   //row render single item
   rowRenderer = (type, data, index, extendedState) => {
-    const {productName, DateOfPurchase, productImage} = data.item;
+    const {productName, DateOfPurchase, productImage, requestStatus} =
+      data.item;
     return (
       <SingleRequest
         productName={productName}
         DateOfPurchase={DateOfPurchase}
         productImage={productImage}
+        requestStatus={requestStatus}
+        changeStatus={() => this.changeStatus(index)}
       />
     );
   };

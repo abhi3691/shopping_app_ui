@@ -3,7 +3,9 @@ import React, {Component} from 'react';
 import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
 import ScreenRatio from '../../../global_functions/screen_ratio/ScreenRatio';
 import styles from './ProductListStyle';
-import RequestData from '../reqest_list/RequstData';
+import ProductListSwipe from '../../organization/product_list_siwp/ProductListSwipe';
+import ProductKeyFeatures from '../../organization/product_key_features/ProductKeyFeatures';
+import ProductCustomerReview from '../../organization/product_customer_review/ProductCustomerReview';
 class ProductList extends Component {
   constructor(props) {
     super(props);
@@ -21,8 +23,7 @@ class ProductList extends Component {
           return this.state.list.getDataForIndex(i).type;
         },
         (type, dim) => {
-          (dim.width = ScreenRatio.width),
-            (dim.height = ScreenRatio.height / 6);
+          (dim.width = ScreenRatio.width), (dim.height = ScreenRatio.height);
         },
       )),
       (this.extendedState = {});
@@ -36,27 +37,20 @@ class ProductList extends Component {
   //loadData Function
 
   loadData = () => {
-    data = RequestData;
-    if (data.length !== 0) {
-      for (let i = 0; i < data.length; i++) {
-        this.state.dataList.push({
-          type: 'NORMAL',
-          item: {
-            productName: data[i].productName,
-            DateOfPurchase: data[i].DateOfPurchase,
-            productImage: data[i].productImage,
-            requestStatus: false,
-          },
-        });
-        if (i == data.length - 1) {
-          this.setState({
-            list: new DataProvider((r1, r2) => {
-              return r1 != r2;
-            }).cloneWithRows(this.state.dataList),
-          });
-        }
-      }
-    }
+    data = this.props.data;
+    this.state.dataList.push({
+      type: 'NORMAL',
+      item: {
+        productName: data.productName,
+        DateOfPurchase: data.DateOfPurchase,
+        productImage: data.productImage,
+      },
+    });
+    this.setState({
+      list: new DataProvider((r1, r2) => {
+        return r1 != r2;
+      }).cloneWithRows(this.state.dataList),
+    });
   };
 
   //request change function
@@ -73,7 +67,13 @@ class ProductList extends Component {
   rowRenderer = (type, data, index, extendedState) => {
     const {productName, DateOfPurchase, productImage, requestStatus} =
       data.item;
-    return <View />;
+    return (
+      <View style={{flex: 1}}>
+        <ProductListSwipe />
+        <ProductKeyFeatures />
+        <ProductCustomerReview />
+      </View>
+    );
   };
 
   //footer

@@ -21,7 +21,7 @@ const TabNavigation = () => {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarScrollEnabled: true,
-        swipeEnabled: true,
+        swipeEnabled: false,
         tabBarIndicatorStyle: {
           opacity: 0,
         },
