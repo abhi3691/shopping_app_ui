@@ -6,20 +6,14 @@ import ScreenRatio from '../../../global_functions/screen_ratio/ScreenRatio';
 import {TouchableHighlight} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
 
-const SingleRequest = ({
-  productName,
-  DateOfPurchase,
-  productImage,
-  requestStatus,
-  changeStatus,
-}) => {
+const SingleRequest = ({productName, DateOfPurchase, productImage}) => {
   const navigation = useNavigation();
   const gotoScreen = () => {
     const data = {productName, productImage, DateOfPurchase};
     navigation.navigate('ProductDetailsPage', {data: data});
   };
   return (
-    <TouchableHighlight
+    <View
       style={styles.container}
       underlayColor="transparent"
       onPress={() => gotoScreen()}>
@@ -41,13 +35,13 @@ const SingleRequest = ({
           </View>
         </View>
         <Button
-          value={requestStatus == true ? 'requested' : 'request'}
-          changeValue={() => changeStatus()}
+          value={'request'}
+          changeValue={() => gotoScreen()}
           height={ScreenRatio.height / 25}
           width={ScreenRatio.width / 1.2}
         />
       </>
-    </TouchableHighlight>
+    </View>
   );
 };
 
