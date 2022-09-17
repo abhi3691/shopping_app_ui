@@ -11,6 +11,7 @@ import CartIcon from '../../../assets/svg_icons/cart.svg'
 import PersonIconFilled from '../../../assets/svg_icons/person-filled.svg'
 import PersonIcon from '../../../assets/svg_icons/person.svg'
 import styles from './TabBarIconStyle'
+import customColor from '../../../theme/Color'
 const TabBarIcon = ({ iconName, label, color }) => {
   return (
     <View style={styles.container}>
@@ -69,7 +70,7 @@ const TabBarIcon = ({ iconName, label, color }) => {
                           width={FontRatio(18)}
                         />
       }
-      <Text style={{ fontSize: FontRatio(12), color: color }}>{label}</Text>
+      <Text style={[styles.labelStyle,{color:color}]}>{label}</Text>
     </View>
   )
 }
