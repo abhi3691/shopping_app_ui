@@ -31,9 +31,9 @@ const TabNavigation = () => {
         tabBarIconStyle: styles.tabBarIconStyle,
       }}
       tabBarPosition="bottom"
-      initialRouteName="HomeScreen">
+      initialRouteName="StackNavigation">
       <Tab.Screen
-        name="HomeScreen"
+        name="StackNavigation"
         component={StackNavigation}
         options={{
           tabBarIcon: ({focused}) => {
