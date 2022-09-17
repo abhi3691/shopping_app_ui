@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     labelStyle: {
-        fontSize: FontRatio(12),
+        fontSize: FontRatio(10),
         
     }
 })

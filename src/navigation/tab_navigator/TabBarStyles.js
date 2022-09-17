@@ -1,19 +1,23 @@
 import { StyleSheet } from 'react-native'
-import ScreenRatio from '../global_functions/screen_ratio/ScreenRatio'
-import customColor from '../theme/Color'
+import ScreenRatio from '../../global_functions/screen_ratio/ScreenRatio'
+import customColor from '../../theme/Color'
 
 const styles = StyleSheet.create({
     container: {
-        height: ScreenRatio.height / 12,
+        height: ScreenRatio.height / 14,
         width: ScreenRatio.width / 1.1,
-        margin: 20,
+        position: 'absolute',
+        bottom: 20,
+        right: 20,
+        left:20,
         borderRadius: 10,
+        elevation:3,
         alignItems: 'center',
         justifyContent: 'space-between',
         backgroundColor: customColor.white
     },
     tabBarItemContainer: {
-        height: ScreenRatio.height / 12,
+        height: ScreenRatio.height / 14,
         width: ScreenRatio.width / 5,
         alignItems: 'center',
         justifyContent: 'center',

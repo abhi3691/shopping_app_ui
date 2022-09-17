@@ -1,15 +1,19 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import HomeScreen from '../screens/home_screen/HomeScreen'
-import CartScreen from '../screens/cart_screen/CartScreen'
-import NotificationScreen from '../screens/notification_screen/NotificationScreen'
-import ProfileScreen from '../screens/profile_screen/ProfileScreen'
+import HomeScreen from '../../screens/home_screen/HomeScreen'
+import CartScreen from '../../screens/cart_screen/CartScreen'
+import NotificationScreen from '../../screens/notification_screen/NotificationScreen'
+import ProfileScreen from '../../screens/profile_screen/ProfileScreen'
 import styles from './TabBarStyles'
-import TabBarIcon from '../components/molecules/tabbar_icons/TabBarIcon'
-import customColor from '../theme/Color'
+import TabBarIcon from '../../components/molecules/tabbar_icons/TabBarIcon'
+import customColor from '../../theme/Color'
+import Badge from '../../components/atom/badge/Badge'
 const TabNavigation = () => {
+    //set hook
     const Tab = createMaterialTopTabNavigator()
+
+    //tab navigation container
     return (
         <Tab.Navigator
 
@@ -17,14 +21,16 @@ const TabNavigation = () => {
                 headerShown: false,
                 tabBarShowLabel: false,
                 tabBarScrollEnabled: true,
-                swipeEnabled: false,
+                swipeEnabled: true,
                 tabBarIndicatorStyle: {
                     opacity: 0
                 },
                 tabBarPressColor: "transparent",
                 tabBarStyle: styles.container,
                 tabBarItemStyle: styles.tabBarItemContainer,
-                tabBarIconStyle: styles.tabBarIconStyle
+                tabBarIconStyle: styles.tabBarIconStyle,
+
+                
 
             }}
             tabBarPosition="bottom"
@@ -54,6 +60,11 @@ const TabNavigation = () => {
                 name='NotificationScreen'
                 component={NotificationScreen}
                 options={{
+                    tabBarBadge:() => {
+                        return (
+                           <Badge count={2}/>
+                       )
+                   },
 
                     tabBarIcon: ({ focused }) => {
                         return (
