@@ -2,7 +2,14 @@ import {View, Text, TouchableHighlight} from 'react-native';
 import React from 'react';
 import styles from './ButtonStyles';
 
-const Button = ({value, changeValue, height, width}) => {
+type ButtonProps ={
+  value:any,
+  changeValue: ()=> void,
+  height:number,
+  width:number
+}
+
+const Button :React.FC<ButtonProps> = ({value, changeValue, height, width}) => {
   return (
     <TouchableHighlight
       underlayColor="transparent"

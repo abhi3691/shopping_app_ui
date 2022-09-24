@@ -3,7 +3,12 @@ import React from 'react';
 import styles from '../HomeHeaderStyle';
 import SwipingSwitch from '../../molecules/swiping_switch/SwipingSwitch';
 
-const HomeHeader = ({name}) => {
+type HomeHeaderProps ={
+  name:string
+}
+
+
+const HomeHeader: React.FC<HomeHeaderProps> = ({name}) => {
   //switch Options
   const options = [
     {label: 'Purchases', value: 'Purchases'},

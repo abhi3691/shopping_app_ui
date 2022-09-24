@@ -4,10 +4,19 @@ import styles from './SingleRequestStyle';
 import Button from '../../atom/button/Button';
 import ScreenRatio from '../../../global_functions/screen_ratio/ScreenRatio';
 import {TouchableHighlight} from 'react-native-gesture-handler';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation,ParamListBase,NavigationProp} from '@react-navigation/native';
 
-const SingleRequest = ({productName, DateOfPurchase, productImage}) => {
-  const navigation = useNavigation();
+interface SingleRequestProps{
+  productName:string
+   DateOfPurchase:string
+   productImage:string,
+   navigation: NavigationProp<ParamListBase>
+}
+
+
+
+const SingleRequest:React.FC<SingleRequestProps> = ({productName, DateOfPurchase, productImage,navigation}) => {
+  navigation = useNavigation()
   const gotoScreen = () => {
     const data = {productName, productImage, DateOfPurchase};
     navigation.navigate('ProductDetailsPage', {data: data});
@@ -15,9 +24,8 @@ const SingleRequest = ({productName, DateOfPurchase, productImage}) => {
   return (
     <View
       style={styles.container}
-      underlayColor="transparent"
-      onPress={() => gotoScreen()}>
-      <>
+      >
+      
         <View style={styles.topContainer}>
           <Image
             source={{uri: productImage}}
@@ -40,7 +48,7 @@ const SingleRequest = ({productName, DateOfPurchase, productImage}) => {
           height={ScreenRatio.height / 25}
           width={ScreenRatio.width / 1.2}
         />
-      </>
+      
     </View>
   );
 };

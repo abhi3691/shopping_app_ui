@@ -4,7 +4,13 @@ import SwitchSelector from 'react-native-switch-selector';
 import customColor from '../../../theme/Color';
 import styles from './SwipingSwitchStyle';
 import ScreenRatio from '../../../global_functions/screen_ratio/ScreenRatio';
-const SwipingSwitch = ({options}) => {
+
+interface SwipingSwitchProps{
+  options:[]
+}
+
+const SwipingSwitch:React.FC<SwipingSwitchProps> = ({options}) => {
+
   return (
     <View style={styles.container}>
       {/* //swipe Switch */}
@@ -16,7 +22,7 @@ const SwipingSwitch = ({options}) => {
         options={options}
         initial={0}
         borderRadius={ScreenRatio.width / 50}
-        onPress={value => console.log(`Call onPress with value: ${value}`)}
+        onPress={(value) => console.log(`Call onPress with value: ${value}`)}
       />
     </View>
   );

@@ -2,7 +2,14 @@ import {View, Image} from 'react-native';
 import React from 'react';
 import styles from './ImagePreviewSingleStyle';
 
-const ImagePreviewSingle = ({item}) => {
+
+interface ImagePirivewPorps {
+  item:{
+    image:string
+  }
+}
+
+const ImagePreviewSingle:React.FC<ImagePirivewPorps> = ({item}) => {
   return (
     <View style={styles.container}>
       <Image

@@ -3,7 +3,7 @@ import React from 'react';
 
 const ProductCustomerReview = () => {
   return (
-    <View>
+    <View style={{flex: 1}}>
       <Text>ProductCustomerReview</Text>
     </View>
   );

@@ -18,7 +18,6 @@ const TabNavigation = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: false,
         tabBarShowLabel: false,
         tabBarScrollEnabled: true,
         swipeEnabled: false,
@@ -31,10 +30,10 @@ const TabNavigation = () => {
         tabBarIconStyle: styles.tabBarIconStyle,
       }}
       tabBarPosition="bottom"
-      initialRouteName="StackNavigation">
+      initialRouteName="Home">
       <Tab.Screen
-        name="StackNavigation"
-        component={StackNavigation}
+        name="Home"
+        component={HomeScreen}
         options={{
           tabBarIcon: ({focused}) => {
             return (

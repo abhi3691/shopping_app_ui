@@ -8,7 +8,7 @@ import {Rating} from 'react-native-ratings';
 
 const LikeAndReview = ({}) => {
   //state
-  const [like, setLike] = React.useState(false);
+  const [like, setLike] = React.useState<boolean>(false);
 
   //change like function
   const changeLike = () => {

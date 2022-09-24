@@ -6,7 +6,14 @@ import Icons from 'react-native-vector-icons/Ionicons';
 import customColor from '../../../theme/Color';
 import FontRatio from '../../../global_functions/font_ratio/FontRatio';
 import {useNavigation} from '@react-navigation/native';
-const SearchHeader = ({value, onChangeText}) => {
+
+type SearchHeaderProps ={
+  value:string,
+  onChangeText:(x:string)=> void
+}
+
+
+const SearchHeader:React.FC<SearchHeaderProps> = ({value, onChangeText}) => {
   //hook
   const navigation = useNavigation();
 
@@ -33,14 +40,14 @@ const SearchHeader = ({value, onChangeText}) => {
           placeholder="Search"
           value={value}
           placeholderTextColor={customColor.gray}
-          onChangeText={() => onChangeText()}
+          onChangeText={(x) => onChangeText(x)}
           style={styles.input}
           numberOfLines={1}
         />
         <TouchableHighlight
           style={styles.iconContainer}
           underlayColor="transparent">
-          <Icons name="search" color={customColor.gray} size={FontRatio(25)} />
+          <Icons name="search" color={customColor.gray} size={FontRatio(20)} />
         </TouchableHighlight>
       </View>
     </View>

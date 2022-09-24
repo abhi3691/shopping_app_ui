@@ -12,7 +12,13 @@ import PersonIconFilled from '../../../assets/svg_icons/person-filled.svg';
 import PersonIcon from '../../../assets/svg_icons/person.svg';
 import styles from './TabBarIconStyle';
 import customColor from '../../../theme/Color';
-const TabBarIcon = ({iconName, label, color}) => {
+
+type TabIconprops ={
+  iconName:string,
+  label:string,
+  color:string
+}
+const TabBarIcon :React.FC<TabIconprops> = ({iconName, label, color}) => {
   return (
     <View style={styles.container}>
       {iconName === 'home-filled' ? (

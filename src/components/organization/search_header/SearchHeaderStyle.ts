@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: FontRatio(12),
-    color: customColor.gray,
+    color: customColor.black,
     padding: 10,
     alignItems: 'center',
     justifyContent: 'center',

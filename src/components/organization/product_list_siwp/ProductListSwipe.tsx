@@ -6,7 +6,14 @@ import ImagePreviewSingle from '../../molecules/image_preview_single/ImagePrevie
 import styles from './ProductListSwipeStyle';
 import customColor from '../../../theme/Color';
 
-const ProductListSwipe = () => {
+interface PropdectListSwipProps {
+  item:{
+    image:string
+  }
+}
+
+
+const ProductListSwipe:React.FC<PropdectListSwipProps> = ({item}) => {
   return (
     <View style={styles.container}>
       <SwiperFlatList
