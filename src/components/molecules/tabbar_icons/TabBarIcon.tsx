@@ -13,12 +13,20 @@ import PersonIcon from '../../../assets/svg_icons/person.svg';
 import styles from './TabBarIconStyle';
 import customColor from '../../../theme/Color';
 
-type TabIconprops ={
-  iconName:string,
-  label:string,
-  color:string
-}
-const TabBarIcon :React.FC<TabIconprops> = ({iconName, label, color}) => {
+type TabIconprops = {
+  iconName:
+    | 'home-filled'
+    | 'home'
+    | 'notifications-filled'
+    | 'notifications'
+    | 'cart-filled'
+    | 'cart'
+    | 'person-filled'
+    | 'person';
+  label: string;
+  color: string;
+};
+const TabBarIcon: React.FC<TabIconprops> = ({iconName, label, color}) => {
   return (
     <View style={styles.container}>
       {iconName === 'home-filled' ? (
