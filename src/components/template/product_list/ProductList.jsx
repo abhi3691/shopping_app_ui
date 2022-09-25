@@ -6,39 +6,35 @@ import styles from './ProductListStyle';
 import ProductListSwipe from '../../organization/product_list_siwp/ProductListSwipe';
 import ProductKeyFeatures from '../../organization/product_key_features/ProductKeyFeatures';
 import ProductCustomerReview from '../../organization/product_customer_review/ProductCustomerReview';
-class ProductList extends Component {
-  constructor(props) {
-    super(props);
+const ProductList = ({data}) => {
+  //ref
+  const dataList = React.useRef([]);
 
-    // state Declare
-    (this.state = {
-      list: new DataProvider((r1, r2) => {
-        return r1 !== r2;
-      }),
-      dataList: [],
-    }),
-      //ref declare
-      (this.layoutProvider = new LayoutProvider(
-        i => {
-          return this.state.list.getDataForIndex(i).type;
-        },
-        (type, dim) => {
-          (dim.width = ScreenRatio.width), (dim.height = ScreenRatio.height);
-        },
-      )),
-      (this.extendedState = {});
-  }
+  //state
+  const [extendedState,setextendedState] =React.useState({})
+  const [dataProvider,setDataProvider] = React.useState(new DataProvider((r1, r2) => {
+    return r1 !== r2;
+  }))
+
+  //ref declare
+  const layoutProvider = new LayoutProvider(
+    i => {
+      return dataProvider.getDataForIndex(i).type;
+    },
+    (type, dim) => {
+      (dim.width = ScreenRatio.width), (dim.height = ScreenRatio.height);
+    },
+  );
 
   //page rendering
-  componentDidMount() {
-    this.loadData();
-  }
+  React.useEffect(() => {
+    loadData();
+  }, []);
 
   //loadData Function
-
-  loadData = () => {
-    data = this.props.data;
-    this.state.dataList.push({
+  const loadData = () => {
+    dataList.current = [];
+    dataList.current.push({
       type: 'NORMAL',
       item: {
         productName: data.productName,
@@ -46,27 +42,20 @@ class ProductList extends Component {
         productImage: data.productImage,
       },
     });
-    this.setState({
-      list: new DataProvider((r1, r2) => {
+   
+    setDataProvider(new DataProvider((r1, r2) => {
         return r1 != r2;
-      }).cloneWithRows(this.state.dataList),
-    });
+      }).cloneWithRows(dataList.current))
+    
   };
 
   //request change function
 
-  changeStatus = index => {
-    this.state.dataList[index].item.requestStatus =
-      !this.state.dataList[index].item.requestStatus;
-    this.setState({
-      extendedState: this.state.dataList[index].item.requestStatus,
-    });
-  };
+
 
   //row render single item
-  rowRenderer = (type, data, index, extendedState) => {
-    const {productName, DateOfPurchase, productImage, requestStatus} =
-      data.item;
+  const rowRenderer = (type, data, index, extendedState) => {
+    let {productName, DateOfPurchase, productImage, requestStatus} = data.item;
     return (
       <View style={{flexGrow: 1}}>
         <ProductListSwipe />
@@ -77,31 +66,26 @@ class ProductList extends Component {
   };
 
   //footer
-  renderFooter = () => {
+  const renderFooter = () => {
     return <View style={styles.footer} />;
   };
 
   // Recycler list View
-
-  render() {
-    const {list, dataList} = this.state;
-    return (
-      <View style={styles.container}>
-        {this.state.dataList.length !== 0}
-        {
-          <RecyclerListView
-            dataProvider={list}
-            layoutProvider={this.layoutProvider}
-            rowRenderer={this.rowRenderer}
-            renderFooter={this.renderFooter}
-            showsVerticalScrollIndicator={false}
-            forceNonDeterministicRendering={false}
-            extendedState={{state: this.extendedState}}
-          />
-        }
-      </View>
-    );
-  }
-}
+  return (
+    <View style={styles.container}>
+      {dataList.current.length !== 0 && (
+        <RecyclerListView
+          dataProvider={dataProvider}
+          layoutProvider={layoutProvider}
+          rowRenderer={rowRenderer}
+          renderFooter={renderFooter}
+          showsVerticalScrollIndicator={false}
+          forceNonDeterministicRendering={false}
+          extendedState={{state: extendedState}}
+        />
+      )}
+    </View>
+  );
+};
 
 export default ProductList;

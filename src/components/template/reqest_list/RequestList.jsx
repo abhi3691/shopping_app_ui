@@ -5,42 +5,42 @@ import ScreenRatio from '../../../global_functions/screen_ratio/ScreenRatio';
 import RequestData from './RequstData';
 import styles from './RequestListStyle';
 import SingleRequest from '../../organization/single_reqest/SingleRequest';
-class RequestList extends Component {
-  constructor(props) {
-    super(props);
+const  RequestList=()=>  {
+  
+  //ref
+  const dataList = React.useRef([]);
 
-    // state Declare
-    (this.state = {
-      list: new DataProvider((r1, r2) => {
-        return r1 !== r2;
-      }),
-      dataList: [],
-    }),
-      //ref declare
-      (this.layoutProvider = new LayoutProvider(
-        i => {
-          return this.state.list.getDataForIndex(i).type;
-        },
-        (type, dim) => {
-          (dim.width = ScreenRatio.width),
-            (dim.height = ScreenRatio.height / 6);
-        },
-      )),
-      (this.extendedState = {});
-  }
+  //state
+  const [extendedState,setextendedState] =React.useState({})
+  const [dataProvider,setDataProvider] = React.useState(new DataProvider((r1, r2) => {
+    return r1!== r2;
+  }))
 
+  //layout declare
+  const layoutProvider = new LayoutProvider(
+    i => {
+      return dataProvider.getDataForIndex(i).type;
+    },
+    (type, dim) => {
+      (dim.width = ScreenRatio.width), (dim.height = ScreenRatio.height/6);
+    },
+  );
   //page rendering
-  componentDidMount() {
-    this.loadData();
-  }
+  React.useEffect(() => {
+      loadData();
+
+  }, []);
+
 
   //loadData Function
 
-  loadData = () => {
+const  loadData = () => {
+  dataList.current =[];
     data = RequestData;
     if (data.length !== 0) {
+     
       for (let i = 0; i < data.length; i++) {
-        this.state.dataList.push({
+        dataList.current.push({
           type: 'NORMAL',
           item: {
             productName: data[i].productName,
@@ -50,11 +50,9 @@ class RequestList extends Component {
           },
         });
         if (i == data.length - 1) {
-          this.setState({
-            list: new DataProvider((r1, r2) => {
-              return r1 != r2;
-            }).cloneWithRows(this.state.dataList),
-          });
+          setDataProvider(new DataProvider((r1, r2) => {
+            return r1 != r2;
+          }).cloneWithRows(dataList.current))
         }
       }
     }
@@ -62,16 +60,16 @@ class RequestList extends Component {
 
   //request change function
 
-  changeStatus = index => {
-    this.state.dataList[index].item.requestStatus =
-      !this.state.dataList[index].item.requestStatus;
-    this.setState({
-      extendedState: this.state.dataList[index].item.requestStatus,
-    });
+ const changeStatus = index => {
+    dataList.current[index].item.requestStatus =
+      !dataList.current[index].item.requestStatus;
+    setextendedState(
+       dataList.current[index].item.requestStatus,
+    )
   };
 
   //row render single item
-  rowRenderer = (type, data, index, extendedState) => {
+  const rowRenderer = (type, data, index, extendedState) => {
     const {productName, DateOfPurchase, productImage, requestStatus} =
       data.item;
     return (
@@ -80,37 +78,34 @@ class RequestList extends Component {
         DateOfPurchase={DateOfPurchase}
         productImage={productImage}
         requestStatus={requestStatus}
-        changeStatus={() => this.changeStatus(index)}
+        changeStatus={() => changeStatus(index)}
       />
     );
   };
 
   //footer
-  renderFooter = () => {
+  const renderFooter = () => {
     return <View style={styles.footer} />;
   };
 
   // Recycler list View
 
-  render() {
-    const {list, dataList} = this.state;
     return (
       <View style={styles.container}>
-        {this.state.dataList.length !== 0}
+        {dataList.length !== 0}
         {
           <RecyclerListView
-            dataProvider={list}
-            layoutProvider={this.layoutProvider}
-            rowRenderer={this.rowRenderer}
-            renderFooter={this.renderFooter}
+            dataProvider={dataProvider}
+            layoutProvider={layoutProvider}
+            rowRenderer={rowRenderer}
+            renderFooter={renderFooter}
             showsVerticalScrollIndicator={false}
             forceNonDeterministicRendering={false}
-            extendedState={{state: this.extendedState}}
+            extendedState={{state: extendedState}}
           />
         }
       </View>
     );
-  }
 }
 
 export default RequestList;
