@@ -1,20 +1,23 @@
 import {Text, View} from 'react-native';
-import React, {Component} from 'react';
+import React, {Component, FC} from 'react';
 import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
 import ScreenRatio from '../../../global_functions/screen_ratio/ScreenRatio';
 import styles from './ProductListStyle';
 import ProductListSwipe from '../../organization/product_list_siwp/ProductListSwipe';
 import ProductKeyFeatures from '../../organization/product_key_features/ProductKeyFeatures';
 import ProductCustomerReview from '../../organization/product_customer_review/ProductCustomerReview';
-const ProductList = ({data}) => {
+import {Data, RecycleData} from './Props';
+const ProductList: FC<Data> = ({item}) => {
   //ref
-  const dataList = React.useRef([]);
+  const dataList = React.useRef<RecycleData[]>([]);
 
   //state
-  const [extendedState,setextendedState] =React.useState({})
-  const [dataProvider,setDataProvider] = React.useState(new DataProvider((r1, r2) => {
-    return r1 !== r2;
-  }))
+  const [extendedState, setextendedState] = React.useState({});
+  const [dataProvider, setDataProvider] = React.useState(
+    new DataProvider((r1, r2) => {
+      return r1 !== r2;
+    }),
+  );
 
   //ref declare
   const layoutProvider = new LayoutProvider(
@@ -37,28 +40,31 @@ const ProductList = ({data}) => {
     dataList.current.push({
       type: 'NORMAL',
       item: {
-        productName: data.productName,
-        DateOfPurchase: data.DateOfPurchase,
-        productImage: data.productImage,
+        productName: item.productName,
+        DateOfPurchase: item.DateOfPurchase,
+        productImage: item.productImage,
       },
     });
-   
-    setDataProvider(new DataProvider((r1, r2) => {
+
+    setDataProvider(
+      new DataProvider((r1, r2) => {
         return r1 != r2;
-      }).cloneWithRows(dataList.current))
-    
+      }).cloneWithRows(dataList.current),
+    );
   };
 
   //request change function
 
-
-
   //row render single item
-  const rowRenderer = (type, data, index, extendedState) => {
-    let {productName, DateOfPurchase, productImage, requestStatus} = data.item;
+  const rowRenderer = (
+    type: any,
+    data: RecycleData,
+    index: any,
+    extendedState: any,
+  ) => {
     return (
       <View style={{flexGrow: 1}}>
-        <ProductListSwipe />
+        <ProductListSwipe item={data.item} />
         <ProductKeyFeatures />
         <ProductCustomerReview />
       </View>

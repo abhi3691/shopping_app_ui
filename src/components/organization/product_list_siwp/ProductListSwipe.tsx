@@ -7,13 +7,12 @@ import styles from './ProductListSwipeStyle';
 import customColor from '../../../theme/Color';
 
 interface PropdectListSwipProps {
-  item:{
-    image:string
-  }
+  item: {
+    productImage: string;
+  };
 }
 
-
-const ProductListSwipe:React.FC<PropdectListSwipProps> = ({item}) => {
+const ProductListSwipe: React.FC<PropdectListSwipProps> = ({item}) => {
   return (
     <View style={styles.container}>
       <SwiperFlatList
