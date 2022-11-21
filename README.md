@@ -1,4 +1,4 @@
-# shoppig_app_ui
+# shopping_app_ui
 shopping app ui React-Native
 
 
